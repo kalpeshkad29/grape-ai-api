@@ -10,7 +10,12 @@ model = None
 def get_model():
     global model
     if model is None:
-        model = tf.keras.models.load_model("grape_model.h5")
+        model = tf.keras.models.load_model(MODEL_PATH)
+    return model
+
+        MODEL_PATH = os.path.join(os.path.dirname(__file__), "grape_model.h5")
+
+        model = tf.keras.models.load_model(MODEL_PATH)
     return model
 
 classes = ["black_rot", "esca", "leaf_blight", "healthy"]
