@@ -5,7 +5,13 @@ import cv2
 
 app = FastAPI()
 
-model = tf.keras.models.load_model("grape_model.h5")
+model = None
+
+def get_model():
+    global model
+    if model is None:
+        model = tf.keras.models.load_model("grape_model.h5")
+    return model
 
 classes = ["black_rot", "esca", "leaf_blight", "healthy"]
 
@@ -30,6 +36,7 @@ async def predict(file: UploadFile = File(...)):
     image = image / 255.0
     image = np.expand_dims(image, axis=0)
 
+    model = get_model()
     prediction = model.predict(image)
 
     class_id = np.argmax(prediction)
