@@ -1,6 +1,0 @@
-fastapi
-uvicorn
-numpy
-opencv-python-headless
-python-multipart
-tflite-runtime
